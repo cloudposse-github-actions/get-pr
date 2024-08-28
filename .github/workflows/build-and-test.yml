@@ -43,7 +43,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - run: yarn install --frozen-lockfile --prefer-offline ci
+      - run: yarn add ci
       - name: Build Action
         run: |
           yarn build
