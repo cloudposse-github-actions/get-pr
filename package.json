@@ -14,7 +14,7 @@
     "format:check": "npx prettier --check .",
     "lint": "npx eslint . -c ./.github/linters/.eslintrc.yml",
     "lint:check": "eslint src/**/*.ts",
-    "build": "npx ncc build src/index.ts -o dist --source-map --license licenses.txt",
+    "build": "npx ncc build src/main.ts -o dist --source-map --license licenses.txt",
     "build:watch": "npm run package -- --watch",
     "test": "npx jest",
     "format-check": "prettier --check '**/*.ts'",
