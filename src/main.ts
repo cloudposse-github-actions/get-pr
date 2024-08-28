@@ -4,15 +4,16 @@ import getInputs from './io/get-inputs'
 import getLastPullRequest from './get-last-pr'
 import getPRsAssociatedWithCommit from './adapter/get-prs-associated-with-commit'
 import setOutput from './io/set-output'
+import getPullRequestByID from "./adapter/get-pr-by-id";
 
 async function main(): Promise<void> {
   try {
-    const {token, sha, filterOutClosed, filterOutDraft} = getInputs()
-
+    const {token, id, sha, filterOutClosed, filterOutDraft} = getInputs()
     const octokit = github.getOctokit(token)
-    const allPRs = await getPRsAssociatedWithCommit(octokit, sha)
 
-    const pr = getLastPullRequest(allPRs, {
+    let allPRs = await getPRsAssociatedWithCommit(octokit, sha)
+
+    const pr = id ? await getPullRequestByID(octokit, id) : getLastPullRequest(allPRs, {
       draft: !filterOutDraft,
       closed: !filterOutClosed,
       preferWithHeadSha: sha

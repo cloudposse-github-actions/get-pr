@@ -96,11 +96,11 @@ Thumbs.db
 
 # Ignore built ts files
 __tests__/runner/*
-lib/**/*
 
-#Idea
-.idea/
-
+# IDE files
+.idea
+.vscode
+*.code-workspace
 
 .build-harness
 build-harness

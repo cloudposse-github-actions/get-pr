@@ -6,6 +6,9 @@ inputs:
     description: The GitHub token used to create an authenticated client.
     required: false
     default: ${{ github.token }}
+  id:
+    description: PR ID to get info for.
+    required: false
   sha:
     description: Sha to get PR for. Defaults to current sha.
     required: false

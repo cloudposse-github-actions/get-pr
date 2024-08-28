@@ -1,12 +1,12 @@
 import * as core from '@actions/core'
-import {PR} from '../types/pull-request'
+import {PRSimple, PR} from '../types/pull-request'
 
 function setOutputWithDebug(key: string, value: unknown): void {
   core.debug(`Setting output: key: "${key}", value: "${value}"`)
   core.setOutput(key, value)
 }
 
-export default function setOutput(pr: PR | null): void {
+export default function setOutput(pr: PRSimple | PR | null): void {
   setOutputWithDebug('found', !!pr)
   if (pr) {
     setOutputWithDebug('number', pr.number.toString())
