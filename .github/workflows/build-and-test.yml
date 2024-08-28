@@ -43,10 +43,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - run: npm ci
+      - run: yarn install --frozen-lockfile --prefer-offline ci
       - name: Build Action
         run: |
-          npm run build
+          yarn build
       - name: Run Action
         uses: ./
         id: pr
@@ -66,10 +66,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - run: npm ci
+      - run: yarn install --frozen-lockfile --prefer-offline ci
       - name: Build Action
         run: |
-          npm run build
+          yarn build
       - name: Run Action
         uses: ./
         id: pr
