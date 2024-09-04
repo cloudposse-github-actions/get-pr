@@ -35,37 +35,9 @@ references: []
 
 # How to use this project
 usage: |-
-  ### By SHA
+  The action allows getting PR info by `id` or `sha.`
+  `id` has precedence over `sha`. It will seek for PR by `sha` only if `id` input is empty.
   
-  ```yaml
-    on:
-      push:
-        branches:
-          - main
-
-    jobs:
-      pr:
-        name: PR Info
-        runs-on: ubuntu-latest
-        steps:
-          - uses: cloudposse-github-actions/get-pr@main
-            id: pr
-        outputs:
-          base: ${{ fromJSON(steps.pr.outputs.pr).base.sha }}
-          head: ${{ fromJSON(steps.pr.outputs.pr).head.sha }}
-          found: ${{ steps.pr.outputs.found }}
-          json: ${{ steps.pr.outputs.json }}
-          number: ${{ steps.pr.outputs.number }}
-          title: ${{ steps.pr.outputs.title }}
-          body: ${{ steps.pr.outputs.body }}
-          url: ${{ steps.pr.outputs.url }}
-          created_at: ${{ steps.pr.outputs.created_at }}
-          merged_at: ${{ steps.pr.outputs.merged_at }}
-          closed_at: ${{ steps.pr.outputs.closed_at }}
-          labels: ${{ steps.pr.outputs.labels }}
-  ```
-
-
   ### By ID
   
   ```yaml
@@ -84,6 +56,36 @@ usage: |-
             id: pr
             with:
               id: ${{ github.event.number }}
+        outputs:
+          base: ${{ fromJSON(steps.pr.outputs.pr).base.sha }}
+          head: ${{ fromJSON(steps.pr.outputs.pr).head.sha }}
+          found: ${{ steps.pr.outputs.found }}
+          json: ${{ steps.pr.outputs.json }}
+          number: ${{ steps.pr.outputs.number }}
+          title: ${{ steps.pr.outputs.title }}
+          body: ${{ steps.pr.outputs.body }}
+          url: ${{ steps.pr.outputs.url }}
+          created_at: ${{ steps.pr.outputs.created_at }}
+          merged_at: ${{ steps.pr.outputs.merged_at }}
+          closed_at: ${{ steps.pr.outputs.closed_at }}
+          labels: ${{ steps.pr.outputs.labels }}
+  ```
+
+  ### By SHA
+  
+  ```yaml
+    on:
+      push:
+        branches:
+          - main
+
+    jobs:
+      pr:
+        name: PR Info
+        runs-on: ubuntu-latest
+        steps:
+          - uses: cloudposse-github-actions/get-pr@main
+            id: pr
         outputs:
           base: ${{ fromJSON(steps.pr.outputs.pr).base.sha }}
           head: ${{ fromJSON(steps.pr.outputs.pr).head.sha }}
