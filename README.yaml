@@ -35,8 +35,8 @@ references: []
 
 # How to use this project
 usage: |-
-  The action allows getting PR info by `id` or `sha.`
-  `id` has precedence over `sha`. It will seek for PR by `sha` only if `id` input is empty.
+  This action will retrieve the PR metadata by `id` (PR number) or commit `sha`.
+  The `id` takes precedence over `sha`, if both are passed.
   
   ### By ID
   
