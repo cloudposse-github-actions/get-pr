@@ -59,6 +59,44 @@ Fork of [8BitJonny/gh-get-current-pr](https://github.com/8BitJonny/gh-get-curren
 
 
 
+This action will retrieve the PR metadata by `id` (PR number) or commit `sha`.
+The `id` takes precedence over `sha`, if both are passed.
+
+### By ID
+
+```yaml
+  on:
+    pull_request:
+      branches:
+        - main
+      types: [opened, synchronize, reopened]
+
+  jobs:
+    pr:
+      name: PR Info
+      runs-on: ubuntu-latest
+      steps:
+        - uses: cloudposse-github-actions/get-pr@main
+          id: pr
+          with:
+            id: ${{ github.event.number }}
+      outputs:
+        base: ${{ fromJSON(steps.pr.outputs.pr).base.sha }}
+        head: ${{ fromJSON(steps.pr.outputs.pr).head.sha }}
+        found: ${{ steps.pr.outputs.found }}
+        json: ${{ steps.pr.outputs.json }}
+        number: ${{ steps.pr.outputs.number }}
+        title: ${{ steps.pr.outputs.title }}
+        body: ${{ steps.pr.outputs.body }}
+        url: ${{ steps.pr.outputs.url }}
+        created_at: ${{ steps.pr.outputs.created_at }}
+        merged_at: ${{ steps.pr.outputs.merged_at }}
+        closed_at: ${{ steps.pr.outputs.closed_at }}
+        labels: ${{ steps.pr.outputs.labels }}
+```
+
+### By SHA
+
 ```yaml
   on:
     push:
@@ -101,6 +139,7 @@ Fork of [8BitJonny/gh-get-current-pr](https://github.com/8BitJonny/gh-get-curren
 | filterOutClosed | True, False, 1 or 0 if only open PRs should be returned. Defaults to false. | N/A | false |
 | filterOutDraft | True, False, 1 or 0 if only non-draft PRs should be returned. Defaults to false. | N/A | false |
 | github-token | The GitHub token used to create an authenticated client. | ${{ github.token }} | false |
+| id | PR ID to get info for. | N/A | false |
 | sha | Sha to get PR for. Defaults to current sha. | N/A | false |
 
 
