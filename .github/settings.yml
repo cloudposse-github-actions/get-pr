@@ -3,6 +3,6 @@ _extends: .github
 
 repository:
   name: get-pr
-  description: Get the PR info associated with the commit
+  description: Get the PR info by ID or associated commit
   homepage: https://cloudposse.com/accelerate
   topics: "github-action"
