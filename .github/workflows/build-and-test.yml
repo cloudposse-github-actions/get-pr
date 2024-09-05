@@ -28,7 +28,7 @@ jobs:
           node-version-file: package.json
           cache: yarn
       - name: install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: yarn add ci
       - uses: cloudposse/github-action-setup-atmos@v2
         with:
           install-wrapper: false
@@ -43,10 +43,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - run: npm ci
+      - run: yarn add ci
       - name: Build Action
         run: |
-          npm run build
+          yarn build
       - name: Run Action
         uses: ./
         id: pr
@@ -66,10 +66,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - run: npm ci
+      - run: yarn add ci
       - name: Build Action
         run: |
-          npm run build
+          yarn build
       - name: Run Action
         uses: ./
         id: pr

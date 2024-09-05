@@ -1,17 +1,17 @@
 import * as github from '@actions/github'
 import * as core from '@actions/core'
 import {GitHub} from '@actions/github/lib/utils'
-import {PRSimple} from '../types/pull-request'
+import {PR} from '../types/pull-request'
 
-export default async function getPullRequestsAssociatedWithCommits(
+export default async function getPullRequestByID(
   octokit: InstanceType<typeof GitHub>,
-  sha: string
-): Promise<PRSimple[]> {
-  const result = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
+  id: number
+): Promise<PR> {
+  const result = await octokit.rest.pulls.get({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
-    commit_sha: sha
-  })
+    pull_number: id
+  });
   core.debug(`Used url to fetch associated PRs: ${result.url}`)
   return result.data
 }

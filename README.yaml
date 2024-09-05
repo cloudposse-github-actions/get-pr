@@ -35,6 +35,44 @@ references: []
 
 # How to use this project
 usage: |-
+  This action will retrieve the PR metadata by `id` (PR number) or commit `sha`.
+  The `id` takes precedence over `sha`, if both are passed.
+  
+  ### By ID
+  
+  ```yaml
+    on:
+      pull_request:
+        branches:
+          - main
+        types: [opened, synchronize, reopened]
+
+    jobs:
+      pr:
+        name: PR Info
+        runs-on: ubuntu-latest
+        steps:
+          - uses: cloudposse-github-actions/get-pr@main
+            id: pr
+            with:
+              id: ${{ github.event.number }}
+        outputs:
+          base: ${{ fromJSON(steps.pr.outputs.pr).base.sha }}
+          head: ${{ fromJSON(steps.pr.outputs.pr).head.sha }}
+          found: ${{ steps.pr.outputs.found }}
+          json: ${{ steps.pr.outputs.json }}
+          number: ${{ steps.pr.outputs.number }}
+          title: ${{ steps.pr.outputs.title }}
+          body: ${{ steps.pr.outputs.body }}
+          url: ${{ steps.pr.outputs.url }}
+          created_at: ${{ steps.pr.outputs.created_at }}
+          merged_at: ${{ steps.pr.outputs.merged_at }}
+          closed_at: ${{ steps.pr.outputs.closed_at }}
+          labels: ${{ steps.pr.outputs.labels }}
+  ```
+
+  ### By SHA
+  
   ```yaml
     on:
       push:
@@ -62,6 +100,7 @@ usage: |-
           closed_at: ${{ steps.pr.outputs.closed_at }}
           labels: ${{ steps.pr.outputs.labels }}
   ```
+
 include:
   - "docs/github-action.md"
 

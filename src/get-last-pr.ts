@@ -1,4 +1,4 @@
-import {PR} from './types/pull-request'
+import {PRSimple} from './types/pull-request'
 
 interface Options {
   draft?: boolean
@@ -11,14 +11,14 @@ const Defaults: Options = {
   closed: true
 }
 
-function findByHeadSha(pullRequests: PR[], sha: string): PR | undefined {
+function findByHeadSha(pullRequests: PRSimple[], sha: string): PRSimple | undefined {
   return pullRequests.find(pullRequest => pullRequest.head.sha.startsWith(sha))
 }
 
 export default function getLastPullRequest(
-  pullRequests: PR[],
+  pullRequests: PRSimple[],
   options: Options
-): PR | null {
+): PRSimple | null {
   options = {...Defaults, ...options}
 
   const filteredPRs = pullRequests
