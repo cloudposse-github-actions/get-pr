@@ -43,7 +43,7 @@ jobs:
         with:
           node-version: '24'
           cache: 'npm'
-      - run: yarn add ci
+      - run: yarn install --frozen-lockfile
       - name: Build Action
         run: |
           yarn build
@@ -66,7 +66,7 @@ jobs:
         with:
           node-version: '24'
           cache: 'npm'
-      - run: yarn add ci
+      - run: yarn install --frozen-lockfile
       - name: Build Action
         run: |
           yarn build
