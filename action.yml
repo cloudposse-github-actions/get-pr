@@ -40,7 +40,7 @@ outputs:
   labels:
     description: The PR Labels if any was found.
 runs:
-  using: node20
+  using: node24
   main: 'dist/index.js'
 branding:
   icon: git-pull-request
